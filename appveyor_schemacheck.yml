@@ -15,5 +15,3 @@ build_script:
     python validate_example_file.py c:\projects\cpacs-yh7xj\schema\cpacs_schema.xml c:\projects\cpacs-yh7xj\schema\cpacs_schema.xsd
 
 test: off
-
-deploy: off
