@@ -1148,6 +1148,14 @@ marko.alder@dlr.de
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
+    
+    <xsd:simpleType name="symmetryType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="x-y-plane"/>
+            <xsd:enumeration value="x-z-plane"/>
+            <xsd:enumeration value="y-z-plane"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <!--
     =================================================================
@@ -21556,12 +21564,12 @@ marko.alder@dlr.de
                     <xsd:element name="transformation" type="transformationType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredCopy">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
+                            <xsd:enumeration value="translatedCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -21636,12 +21644,11 @@ marko.alder@dlr.de
                         <xsd:documentation>UID of the engine pylon.</xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -24643,12 +24650,12 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element minOccurs="0" name="cutOuts" type="fuselageCutOutsType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredCopy">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredExtension"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -25131,12 +25138,12 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element name="linkToFile" type="linkToFileType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredCopy">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
+                            <xsd:enumeration value="translatedCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -25294,12 +25301,12 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element name="transformation" type="transformationType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredCopy">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
+                            <xsd:enumeration value="translatedCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -25733,12 +25740,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     </xsd:element>
                     <xsd:element name="pointList" type="pointListRelXYZVectorType"/>
                 </xsd:sequence>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredExtension"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -31022,12 +31028,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element minOccurs="0" name="components" type="gearComponentsType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -33465,12 +33470,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element minOccurs="0" name="components" type="gearComponentsType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -34476,12 +34480,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                         <xsd:element name="cst2D" type="cst2DType"/>
                     </xsd:choice>
                 </xsd:sequence>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredExtension"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -34557,11 +34560,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                         <xsd:element name="cst2D" type="cst2DType"/>
                     </xsd:choice>
                 </xsd:sequence>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-axis"/>
-                            <xsd:enumeration value="y-axis"/>
+                            <xsd:enumeration value="mirroredExtension"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -35970,12 +35973,12 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     </xsd:element>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredCopy">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
+                            <xsd:enumeration value="translatedCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -37061,12 +37064,11 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element minOccurs="0" name="components" type="gearComponentsType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
@@ -42049,12 +42051,12 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                     <xsd:element minOccurs="0" name="dynamicAircraftModel" type="dynamicAircraftModelType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:string" use="required"/>
-                <xsd:attribute name="symmetry">
+                <xsd:attribute name="symmetry" type="symmetryType"/>
+                <xsd:attribute name="symmetryType" default="mirroredExtension">
                     <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
-                            <xsd:enumeration value="x-y-plane"/>
-                            <xsd:enumeration value="x-z-plane"/>
-                            <xsd:enumeration value="y-z-plane"/>
+                            <xsd:enumeration value="mirroredExtension"/>
+                            <xsd:enumeration value="mirroredCopy"/>
                         </xsd:restriction>
                     </xsd:simpleType>
                 </xsd:attribute>
