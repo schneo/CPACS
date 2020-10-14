@@ -9830,6 +9830,26 @@ marko.alder@dlr.de
                             <xsd:documentation>Mach number</xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
+                    <xsd:element minOccurs="0" name="relWetThrust" type="stringVectorBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Relative maximum thrust (share of maximum possible thrust)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="relDryThrust" type="stringVectorBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Relative dry thrust (share of maximum dry thrust, values > 1 mean: using afterburner)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="n1rel" type="stringVectorBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>...</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="n2rel" type="stringVectorBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>...</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
                     <xsd:element minOccurs="0" name="thrust" type="stringVectorBaseType">
                         <xsd:annotation>
                             <xsd:documentation>Absolute thrust [N]</xsd:documentation>
