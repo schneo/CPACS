@@ -11298,63 +11298,6 @@ marko.alder@dlr.de
         </xsd:complexContent>
     </xsd:complexType>
 
-    <xsd:complexType name="flightPointType">
-        <xsd:annotation>
-            <xsd:appinfo>
-                <sd:schemaDoc>
-                    <ddue:summary>
-                        <ddue:para>flightPointType</ddue:para>
-                    </ddue:summary>
-                    <ddue:remarks>
-                        <ddue:para/>
-                    </ddue:remarks>
-                </sd:schemaDoc>
-            </xsd:appinfo>
-        </xsd:annotation>
-        <xsd:complexContent>
-            <xsd:extension base="complexBaseType">
-                <xsd:sequence>
-                    <xsd:element name="index" type="stringVectorBaseType"/>
-                    <xsd:element name="segmentUID" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="flightTime" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="flightDistance" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="groundDistance" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="staticPressure" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="tAS" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="cAS" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="angleOfAttack" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="angleOfSideslip" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="angleOfRoll" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="mass" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="fuelFlow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="cOFlow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="cO2Flow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="nOXFlow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="sootFlow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="hCFlow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="sO2Flow" type="stringVectorBaseType"/>
-                    <xsd:element minOccurs="0" name="gearDeflections" type="gearDeflectionVectorsType"/>
-                    <xsd:element minOccurs="0" name="controlSurfaceDeflections" type="controlSurfaceDeflectionVectorsType"/>
-                    <xsd:choice>
-                        <xsd:element name="thrust" type="stringVectorBaseType"/>
-                        <xsd:element name="n1" type="stringVectorBaseType"/>
-                    </xsd:choice>
-                    <xsd:choice>
-                        <xsd:sequence>
-                            <xsd:element name="refLocation" type="pointListXYZVectorType"/>
-                            <xsd:element name="currentLocation" type="pointListXYZVectorType"/>
-                        </xsd:sequence>
-                        <xsd:sequence>
-                            <xsd:element name="latitude" type="stringVectorBaseType"/>
-                            <xsd:element name="longitude" type="stringVectorBaseType"/>
-                            <xsd:element name="altitude" type="stringVectorBaseType"/>
-                        </xsd:sequence>
-                    </xsd:choice>
-                </xsd:sequence>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
-
     <xsd:complexType name="flightSystemsType">
         <xsd:annotation>
             <xsd:appinfo>
@@ -26022,33 +25965,6 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
         </xsd:complexContent>
     </xsd:complexType>
 
-    <xsd:complexType name="trajectoryType">
-        <xsd:annotation>
-            <xsd:appinfo>
-                <sd:schemaDoc>
-                    <ddue:summary>
-                        <ddue:para>trajectoryType</ddue:para>
-                    </ddue:summary>
-                    <ddue:remarks>
-                        <ddue:para/>
-                    </ddue:remarks>
-                </sd:schemaDoc>
-            </xsd:appinfo>
-        </xsd:annotation>
-        <xsd:complexContent>
-            <xsd:extension base="complexBaseType">
-                <xsd:all>
-                    <xsd:element name="name" type="stringBaseType"/>
-                    <xsd:element minOccurs="0" name="description" type="stringBaseType"/>
-                    <xsd:element minOccurs="0" name="missionUID" type="stringUIDBaseType"/>
-                    <xsd:element minOccurs="0" name="global" type="trajectoryGlobalType"/>
-                    <xsd:element minOccurs="0" name="flightPoints" type="flightPointType"/>
-                </xsd:all>
-                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
-
     <xsd:complexType name="transmissionGearRatioType">
         <xsd:annotation>
             <xsd:appinfo>
@@ -35341,5 +35257,137 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
- 
+    
+    <xsd:complexType name="trajectoryType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Trajectory</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para/>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Name</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="description" minOccurs="0" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Description</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                	<xsd:element name="specification" type="trajectorySpecificationType"/>
+                	<xsd:element name="globalData" minOccurs="0" type="trajectoryGlobalType"/>
+                	<xsd:element name="trajectoryData" minOccurs="0" type="trajectoryDataType"/>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="trajectorySpecificationType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Specification</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para/>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element name="environment" type="environmentType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Environment
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="missionUID" minOccurs="0" type="stringUIDBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                UID of the corresponding mission definition
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="configuration" minOccurs="0" type="configurationType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Configuration settings
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="trajectoryDataType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>flightPointType</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para/>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                    <xsd:element name="segmentUID" type="stringVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="flightTime" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="flightDistance" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="groundDistance" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="staticPressure" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="machNumber" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="angleOfAttack" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="angleOfSideslip" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="angleOfRoll" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="mass" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="fuelFlow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="cOFlow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="cO2Flow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="nOXFlow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="sootFlow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="hCFlow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="sO2Flow" type="doubleVectorBaseType"/>
+                    <xsd:element minOccurs="0" name="gearDeflections" type="gearDeflectionVectorsType"/>
+                    <xsd:element minOccurs="0" name="controlSurfaceDeflections" type="controlSurfaceDeflectionVectorsType"/>
+                    <xsd:choice>
+                        <xsd:element name="thrust" type="doubleVectorBaseType"/>
+                        <xsd:element name="n1" type="doubleVectorBaseType"/>
+                    </xsd:choice>
+                    <xsd:choice>
+                        <xsd:sequence>
+                            <xsd:element name="refLocation" type="pointListXYZVectorType"/>
+                            <xsd:element name="currentLocation" type="pointListXYZVectorType"/>
+                        </xsd:sequence>
+                        <xsd:sequence>
+                            <xsd:element name="latitude" minOccurs="0" type="doubleVectorBaseType"/>
+                            <xsd:element name="longitude" minOccurs="0" type="doubleVectorBaseType"/>
+                            <xsd:element name="altitude" minOccurs="0" type="doubleVectorBaseType"/>
+                        </xsd:sequence>
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
 </xsd:schema>
