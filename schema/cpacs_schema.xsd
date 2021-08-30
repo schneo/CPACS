@@ -3148,7 +3148,8 @@ marko.alder@dlr.de
         <xsd:complexContent>
             <xsd:extension base="complexBaseType">
                 <xsd:sequence>
-                    <xsd:element maxOccurs="unbounded" name="model" type="aircraftModelType"/>
+                	<xsd:element maxOccurs="unbounded" name="model"
+                		type="aircraftModelType" />
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
@@ -35381,4 +35382,104 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
         </xsd:complexContent>
     </xsd:complexType>
  
+    <!--
+    =================================================================
+        additional types for aerostats
+    =================================================================
+    -->
+    
+    <xsd:complexType name="aerostatType">
+    	<xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Aerostat</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:content>
+                            <ddue:para>The <ddue:legacyItalic>aerostatType</ddue:legacyItalic> contains a list of lighter-than-air aircraft models.
+                            </ddue:para>
+                        </ddue:content>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                	<xsd:element maxOccurs="unbounded" name="model"
+                		type="aerostatModelType" />
+
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="aerostatModelType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Lighter-than-air aircraft model</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:content>
+                            <ddue:para>The <ddue:legacyItalic>aerostatModelType</ddue:legacyItalic> contains the geometric airship
+                            model and associated data.</ddue:para>
+                                <ddue:para>Elements specifying the geometry of the aircraft are <ddue:legacyItalic>hull</ddue:legacyItalic>,
+                                <ddue:legacyItalic>gondola</ddue:legacyItalic>,
+                                <ddue:legacyItalic>stabilizers</ddue:legacyItalic>,
+                                <ddue:legacyItalic>engines</ddue:legacyItalic> (referenced via <ddue:legacyItalic>uID</ddue:legacyItalic>),
+                                <ddue:legacyItalic>enginePylons</ddue:legacyItalic>,
+                                <ddue:legacyItalic>rotorBlades</ddue:legacyItalic>,
+                                <ddue:legacyItalic>landingGear</ddue:legacyItalic>,
+                                <ddue:legacyItalic>systems</ddue:legacyItalic> (to some extend) and 
+                                <ddue:legacyItalic>genericGeometryComponents</ddue:legacyItalic>.
+                            </ddue:para>
+                            <ddue:para>Other elements are dedicated to additional data associated to this aircraft model. Brief and concise analysis results are stored
+                                in the <ddue:legacyItalic>global</ddue:legacyItalic> node. The <ddue:legacyItalic>analysis</ddue:legacyItalic> node contains
+                                extensive results from multidisciplinary analysis modules.</ddue:para>
+                            <ddue:para>In the current CPACS version requirements only refer to the aircraft performance and are therefore specified in the
+                                <ddue:legacyItalic>performanceRequirements</ddue:legacyItalic> node.
+                            </ddue:para>
+                        </ddue:content>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of the aircraft model
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="description" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Description of the aircraft model
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="reference" type="referenceType"/>
+                    <xsd:element minOccurs="0" name="hull" type="hullType"/>
+                    <xsd:element minOccurs="0" name="gondola" type="gondolaType"/>
+                    <xsd:element minOccurs="0" name="stabilizers" type="stabilizersType"/>
+                    <xsd:element minOccurs="0" name="engines" type="enginePositionsType"/>
+                    <xsd:element minOccurs="0" name="enginePylons" type="enginePylonsType"/>
+                    <xsd:element minOccurs="0" name="rotorBlades" type="rotorBladesType"/>
+                    <xsd:element minOccurs="0" name="landingGears" type="landingGearsType"/>
+                    <xsd:element minOccurs="0" name="systems" type="systemsType"/>
+                    <xsd:element minOccurs="0" name="genericGeometryComponents" type="genericGeometryComponentsType"/>
+                    <xsd:element minOccurs="0" name="global" type="aircraftGlobalType"/>
+                    <xsd:element minOccurs="0" name="analyses" type="aircraftAnalysesType"/>
+                    <xsd:element minOccurs="0" name="performanceRequirements" type="performanceRequirementsType"/>
+                    <xsd:element minOccurs="0" name="configurations" type="vehicleConfigurationsType"/>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
 </xsd:schema>
