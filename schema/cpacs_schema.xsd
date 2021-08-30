@@ -26436,16 +26436,28 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
         <xsd:complexContent>
             <xsd:extension base="complexBaseType">
                 <xsd:all>
-                    <xsd:element minOccurs="0" name="aircraft" type="aircraftType"/>
-                    <xsd:element minOccurs="0" name="rotorcraft" type="rotorcraftType"/>
-                    <xsd:element minOccurs="0" name="performanceCases" type="globalPerformanceCasesType"/>
-                    <xsd:element minOccurs="0" name="flightPoints" type="flightPointsType"/>
-                    <xsd:element minOccurs="0" name="engines" type="enginesType"/>
-                    <xsd:element minOccurs="0" name="profiles" type="profilesType"/>
-                    <xsd:element minOccurs="0" name="structuralElements" type="structuralElementsType"/>
-                    <xsd:element minOccurs="0" name="deckElements" type="deckElementsType"/>
-                    <xsd:element minOccurs="0" name="materials" type="materialsType"/>
-                    <xsd:element minOccurs="0" name="fuels" type="fuelsType"/>
+                	<xsd:element minOccurs="0" name="aircraft"
+                		type="aircraftType" />
+                	<xsd:element minOccurs="0" name="rotorcraft"
+                		type="rotorcraftType" />
+                	<xsd:element minOccurs="0" name="aerostat"
+                		type="aerostatType"/>
+                	<xsd:element minOccurs="0" name="performanceCases"
+                		type="globalPerformanceCasesType" />
+                	<xsd:element minOccurs="0" name="flightPoints"
+                		type="flightPointsType" />
+                	<xsd:element minOccurs="0" name="engines"
+                		type="enginesType" />
+                	<xsd:element minOccurs="0" name="profiles"
+                		type="profilesType" />
+                	<xsd:element minOccurs="0" name="structuralElements"
+                		type="structuralElementsType" />
+                	<xsd:element minOccurs="0" name="deckElements"
+                		type="deckElementsType" />
+                	<xsd:element minOccurs="0" name="materials"
+                		type="materialsType" />
+                	<xsd:element minOccurs="0" name="fuels"
+                		type="fuelsType" />
                 </xsd:all>
             </xsd:extension>
         </xsd:complexContent>
@@ -35463,8 +35475,8 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element minOccurs="0" name="reference" type="referenceType"/>
-                    <xsd:element minOccurs="0" name="hull" type="hullType"/>
-                    <xsd:element minOccurs="0" name="gondola" type="gondolaType"/>
+                    <xsd:element minOccurs="0" name="hulls" type="hullsType"/>
+                    <xsd:element minOccurs="0" name="gondolas" type="gondolasType"/>
                     <xsd:element minOccurs="0" name="stabilizers" type="stabilizersType"/>
                     <xsd:element minOccurs="0" name="engines" type="enginePositionsType"/>
                     <xsd:element minOccurs="0" name="enginePylons" type="enginePylonsType"/>
@@ -35481,5 +35493,100 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
+    
+    <xsd:complexType name="hullsType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Hulls</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para>Hulls type, containing the hulls of the
+                            configuration</ddue:para>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="hull" type="hullType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="hullType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>hullType</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:content>
+                            <ddue:para>Hull type, containing all data related to a
+                                hull</ddue:para>
+                            <ddue:mediaLink>
+                                <ddue:image xlink:href="geomBlock"/>
+                            </ddue:mediaLink>
+                        </ddue:content>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Name of hull
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="description" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Description of hull
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="parentUID" type="stringUIDBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                UID of part to which the hull is
+                                mounted (if any)
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="transformation" type="transformationType"/>
+                    <xsd:element name="sections" type="hullSectionsType"/>
+                    <xsd:element minOccurs="0" name="positionings" type="positioningsType"/>
+                    <xsd:element name="segments" type="hullSegmentsType"/>
+                    <xsd:element minOccurs="0" name="structure" type="hullStructureType"/>
+                    <xsd:element minOccurs="0" name="compartments" type="compartmentsType"/>
+                    <xsd:element minOccurs="0" name="decks" type="decksType"/>
+                    <xsd:element minOccurs="0" name="fuelTanks" type="hullFuelTanksType"/>
+                    <xsd:element minOccurs="0" name="cutOuts" type="hullCutOutsType"/>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+                <xsd:attribute name="symmetry">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="none"/>
+                            <xsd:enumeration value="inherit"/>
+                            <xsd:enumeration value="x-y-plane"/>
+                            <xsd:enumeration value="x-z-plane"/>
+                            <xsd:enumeration value="y-z-plane"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
     
 </xsd:schema>
