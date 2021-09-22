@@ -35562,14 +35562,15 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="transformation" type="transformationType"/>
-                    <xsd:element name="sections" type="hullSectionsType"/>
+                    <xsd:element name="sections" type="fuselageSectionsType"/>
                     <xsd:element minOccurs="0" name="positionings" type="positioningsType"/>
-                    <xsd:element name="segments" type="hullSegmentsType"/>
-                    <xsd:element minOccurs="0" name="structure" type="hullStructureType"/>
+                    <xsd:element name="segments" type="fuselageSegmentsType"/>
+                    <xsd:element minOccurs="0" name="structure" type="fuselageStructureType"/>
                     <xsd:element minOccurs="0" name="compartments" type="compartmentsType"/>
                     <xsd:element minOccurs="0" name="decks" type="decksType"/>
                     <xsd:element minOccurs="0" name="fuelTanks" type="hullFuelTanksType"/>
-                    <xsd:element minOccurs="0" name="cutOuts" type="hullCutOutsType"/>
+                    <xsd:element minOccurs="0" name="gasCells" type="gasCellsType"/>
+                    <xsd:element minOccurs="0" name="cutOuts" type="fuselageCutOutsType"/>
                 </xsd:all>
                 <xsd:attribute name="uID" type="xsd:ID" use="required"/>
                 <xsd:attribute name="symmetry">
@@ -35587,6 +35588,258 @@ The fuel tank volume type should also be used for the wing fuel tank</xsd:docume
         </xsd:complexContent>
     </xsd:complexType>
     
+    <xsd:complexType name="stabelizersType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Stabelizers</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para>Stabelizers type, containing all the control surfaces (empannage, rudders, canards...) of an aerostat model.</ddue:para>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="stabelizer" type="stabelizerType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
     
+    <xsd:complexType name="stabelizerType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Wing type, containing all a lifting surface (wing, HTP,
+                            VTP, canard...) of an aircraft model.</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:content>
+                            <ddue:para>Wing type, containing all a lifting surface (wing,
+                                HTP, VTP, canard...) of an aircraft model.</ddue:para>
+                            <ddue:para>Position of the wing: The position of the wing is
+                                defined using the transformation parameters. Using those
+                                parameters, the wing coordinate system is translated, rotated
+                                and scaled.</ddue:para>
+                            <ddue:para>Definition of the wings outer shape: The outer shape
+                                of the wing is defined by airfoils that are placed within the 3D
+                                space. Two airfoils are combined to one wing segment within the
+                                segments. For the definition of the positions of the airfoils,
+                                differnt sections are defined. Within each section one or more
+                                elements are defined. The airfoil shape is defined within the
+                                elements. If the wings outer shape should e.g. have a step it is
+                                possible to define two different airfoils in one section by
+                                using two elements. In most cases each section will only include
+                                one element. Positionings are vectors that are used for an
+                                additional translation of the sections by using 'user friendly
+                                paramaters' as e.g. sweep and dihedral. Please note, the first
+                                positioning may be non-zero. Often it will be zero just to
+                                locate the wing at the position stated by the translation, but
+                                this is not necessary. Finally the wing segments are defined by
+                                combining two consecutive elements. A more detailed description
+                                is given within the different parameters.</ddue:para>
+                            <ddue:para>Definition of control surfaces, wing structures, wing
+                                fuel tank and wing fuselage attachment: those parts are defined
+                                within componentSegments. Please refer to the documentation
+                                there.</ddue:para>
+                            <ddue:mediaLink>
+                                <ddue:image xlink:href="geomBlock"/>
+                            </ddue:mediaLink>
+                        </ddue:content>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of the wing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="description" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Description of the wing.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="parentUID" type="stringUIDBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>UID of part to which the wing is mounted (if
+                                any). The parent of the wing can e.g. be the fuselage. In each
+                                aircraft model, there is exactly one part without a parent part
+                                (The root of the connection hierarchy).</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="transformation" type="transformationType"/>
+                    <xsd:element name="sections" type="wingSectionsType"/>
+                    <xsd:element minOccurs="0" name="positionings" type="positioningsType"/>
+                    <xsd:element name="segments" type="wingSegmentsType"/>
+                    <xsd:element minOccurs="0" name="componentSegments" type="componentSegmentsType"/>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+                <xsd:attribute name="symmetry">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="none"/>
+                            <xsd:enumeration value="inherit"/>
+                            <xsd:enumeration value="x-y-plane"/>
+                            <xsd:enumeration value="x-z-plane"/>
+                            <xsd:enumeration value="y-z-plane"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="hullFuelTanksType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>List of hull fuel tanks.</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para/>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="hullFuelTank" type="hullFuelTankType">
+                        <xsd:annotation>
+                            <xsd:documentation>The fuselage fuel tank geometry is defined by a link to a fuselage geometry compartment.
+The fuel tank volume type should also be used for the wing fuel tank</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="hullFuelTankType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Definition of one hull fuel tank.</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para>The definition of hull tanks is still preliminary.
+                            Currently, there is no link to any structural elements
+                        </ddue:para>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element minOccurs="0" name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of the hull fuel tank.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="description" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Description of the hull fuel tank.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="compartmentUID" type="stringUIDBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Link to the tank geometry defined by a compartment.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="volume" type="fuelTankVolumeType">
+                        <xsd:annotation>
+                            <xsd:documentation/>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="gasCellsType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>List of gas cells.</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para/>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="gasCell" type="gasCellType">
+                        <xsd:annotation>
+                            <xsd:documentation>Gas cells definitions.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="gasCellType">
+        <xsd:annotation>
+            <xsd:appinfo>
+                <sd:schemaDoc>
+                    <ddue:summary>
+                        <ddue:para>Definition of one gas Cell.</ddue:para>
+                    </ddue:summary>
+                    <ddue:remarks>
+                        <ddue:para>
+                        </ddue:para>
+                    </ddue:remarks>
+                </sd:schemaDoc>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="complexBaseType">
+                <xsd:all>
+                    <xsd:element minOccurs="0" name="name" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of the gas cell.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="description" type="stringBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Description of the gas cell.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="compartmentUID" type="stringUIDBaseType">
+                        <xsd:annotation>
+                            <xsd:documentation>Link to the gas cell geometry defined by a compartment.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="volume" type="fuelTankVolumeType">
+                        <xsd:annotation>
+                            <xsd:documentation/>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+                <xsd:attribute name="uID" type="xsd:ID" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
     
 </xsd:schema>

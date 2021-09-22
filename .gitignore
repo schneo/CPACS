@@ -1,3 +1,6 @@
 *.project
 *.pyc
 build
+schema/.metadata/**
+.metadata/**
+/.metadata/
